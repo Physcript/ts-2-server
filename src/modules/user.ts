@@ -10,50 +10,51 @@ import User from '../model/User';
 export const CHK_EMAIL = async (arg1: string, res: Response) => {
     const user = await User.findOne({email: arg1})
     if(user) {
-        res.status(400).json({
-            error: "Email already exist"
-        })
+        const error = {
+            email: "Email already exist"
+        }
+        res.locals.error = error
+
     }
 }
 
 export const CHK_VALID_EMAIL = async (arg1: string, res: Response) => {
 
     if(!validator.isEmail(arg1)) {
-        res.status(400).json({
-            error: "Invalid Email"
-        })
+        const error = {
+            email: "Invalid Email"
+        }
+        res.locals.error = error
     }
 }
 
 export const CHK_PASSWORD = async ( arg1: string, arg2: string,res: Response ) => {
     if(arg1.trim() !== arg2.trim()) {
-        res.status(400).json({
-            error: {
-                "password": 'Password not match',
-                "confirmPassword": "Password not match"
-            }
-        })
+        const error = {
+            "password": 'Password not match',
+            "confirmPassword": "Password not match"
+
+        }
+        res.locals.error = error
     }
 }
 export const CHK_PASSWORD_SPACE = async ( arg1: string, arg2: string,res: Response ) => {
     if(arg1.includes(' ') || arg2.includes(' ') ) {
-        res.status(400).json({
-            error: {
-                "password": 'Invalid Password',
-                "confirmPassword": "Invalid Password"
-            }
-        })
+        const error = {
+            "password": 'Invalid Password',
+            "confirmPassword": "Invalid Password"
+        }
+        res.locals.error = error
     }
 }
 
 export const CHK_PASSWORD_LENGTH = async ( arg1: string, arg2: string,res: Response ) => {
     if(arg1.trim().length < 6) {
-        res.status(400).json({
-            error: {
-                "password": 'Password minimum of 6 character',
-                "confirmPassword": "Password minimum of 6 character"
-            }
-        })
+        const error = {
+            "password": 'Password minimum of 6 character',
+            "confirmPassword": "Password minimum of 6 character"
+        }
+        res.locals.error = error
     }
 }
 

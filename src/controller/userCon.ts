@@ -6,6 +6,7 @@ import User from '../model/User';
 export const register = async (req: Request,res: Response) => {
 
     const { firstName,lastName,email } = req.body
+
     const user = new User({
         firstName,
         lastName,
