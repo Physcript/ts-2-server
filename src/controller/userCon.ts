@@ -17,5 +17,8 @@ export const register = async (req: Request,res: Response) => {
     res.status(200).json({ msg:'Register' })
 }
 export const login = (req: Request,res: Response) => {
-    res.status(200).json({ data: res.locals.token })
+    res.status(200).json({ data: {
+        token: res.locals.token,
+        user: res.locals.user
+    } })
 }

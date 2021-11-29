@@ -69,5 +69,6 @@ export const loginMiddleware = async (req: Request,res: Response,next: NextFunct
     await LOGIN_EMAIL(email,res)
     await LOGIN_MATCH(password,res)
     await LOGIN_TOKEN(res)
+
     next()
 }
