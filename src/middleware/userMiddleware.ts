@@ -11,6 +11,7 @@ import {
 	LOGIN_EMAIL,
 	LOGIN_MATCH,
 	LOGIN_TOKEN,
+	VERIFY_TOKEN,
 } from '../modules/user';
 
 export const registerMiddleware = async (req: Request,res: Response,next: NextFunction) => {
@@ -71,4 +72,9 @@ export const loginMiddleware = async (req: Request,res: Response,next: NextFunct
     await LOGIN_TOKEN(res)
 
     next()
+}
+
+export const verifyMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+   await VERIFY_TOKEN(req.cookies.token, res)
+   next()
 }

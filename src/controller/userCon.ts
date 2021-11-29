@@ -22,3 +22,16 @@ export const login = (req: Request,res: Response) => {
         user: res.locals.user
     } })
 }
+
+export const verify = (req:Request,res:Response)=> {
+    const result = res.locals.user
+    if(result){
+        res.status(200).json({
+            data: result
+        })
+    }else {
+        res.status(400).json({
+            error: 'Invalid'
+        })
+    }
+}
