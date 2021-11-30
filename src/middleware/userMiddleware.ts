@@ -12,6 +12,7 @@ import {
 	LOGIN_MATCH,
 	LOGIN_TOKEN,
 	VERIFY_TOKEN,
+	VERIFY_TOKEN_V2,
 } from '../modules/user';
 
 export const registerMiddleware = async (req: Request,res: Response,next: NextFunction) => {
@@ -77,4 +78,16 @@ export const loginMiddleware = async (req: Request,res: Response,next: NextFunct
 export const verifyMiddleware = async (req: Request, res: Response, next: NextFunction) => {
    await VERIFY_TOKEN(req.cookies.token, res)
    next()
+}
+
+export const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
+    await VERIFY_TOKEN_V2(req.cookies.token, res)
+
+    if(res.locals.auth) {
+        next()
+    }else {
+        res.status(401).json({
+            error: 'Unauthorized'
+        })
+    }
 }

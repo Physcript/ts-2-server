@@ -32,6 +32,7 @@ app.use((req,res,next) => {
 // routes
 
 app.use('/api', routes.userRoutes )
+app.use('/api', routes.postRoutes)
 
 // cors
 app.use(( req,res,next ) => {

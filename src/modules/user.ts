@@ -107,3 +107,17 @@ export const VERIFY_TOKEN = async ( arg1: string , res: Response) => {
     res.locals.user = decode
 
 }
+
+
+export const VERIFY_TOKEN_V2  = async ( arg1: string, res: Response ) => {
+    const decode = await jwt.verify(arg1, `${config.token.login}`, (err,decode) => {
+        if(err) {
+            return false
+        }else {
+            res.locals.user = decode
+            return true
+        }
+    })
+
+    res.locals.auth = decode
+}
